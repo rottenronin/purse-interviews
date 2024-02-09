@@ -1,0 +1,117 @@
+<pre class="question-statement">
+  <div class="question">
+    ## Fun with Pictures
+
+    Given the following code snippet:
+
+    ```javascript
+    {{!-- urls list is not changed in the code, using const is preferable --}}
+    var urls = [  
+        { url: 'https://jsonplaceholder.typicode.com/photos/1'}, 
+        { url: 'https://jsonplaceholder.typicode.com/photos/2'}, 
+        { url: 'https://jsonplaceholder.typicode.com/photos/3'}
+    ];  
+
+    {{!-- using let insted of var --}}
+    var photos = [];
+
+    {{!-- the condition go beyong urls size --}}
+    for (i = 0; i <= urls.length; i++) { 
+      {{!-- fetch is an async function, we are getting promise instead of actual response --}}
+        response = fetch(urls[i].url); 
+        photos[i] = response;
+    }
+
+    console.log(photos);
+
+    // 1. What will be printed?
+    // 2. Fix the code
+    // 3. Write your preferred solution
+    ```
+
+    ### Tasks:
+
+    1.  **Review and Fix:** The program does not work as expected. Review the code, fix any errors, and add comments.
+    2.  **Improved Solution:** Propose a more efficient and elegant solution for fetching and displaying the photos.
+    3.  **Display Images:** Using pure JavaScript, display the list of images on a web page.
+  </div>
+</pre>
+
+<pre>
+  <code>
+    1. Review and fix
+      - Firstly a "Uncaught TypeError" is printed in console
+      because we are trying to access the index beyond the size of urls list with i === urls.length in the loop
+
+      - The fetch function is async, we are getting promise instead of actual request responses
+  </code>
+</pre>
+
+<pre>
+  <code class="typescript">
+    2. Improved solution
+
+    {{{response}}}
+  </code>
+</pre>
+
+<div class="images-list">
+  3. using pure javascript to display images list
+
+  <div id="photos-gallery-wrapper">
+
+  </div>
+</div>
+
+<script>
+  const photos = {{{photos}}}
+  console.log('-- photos', photos)
+  document.addEventListener("DOMContentLoaded", function(){
+    hljs.highlightAll()
+  })
+
+  function createPhotosGallery() {
+    const galleryDiv = document.createElement('div')
+
+    galleryDiv.className = 'photos-gallery'
+    galleryDiv.style.display = 'flex'
+    galleryDiv.style.flexFlow = 'row wrap'
+    galleryDiv.style.gap = '20px'
+ 
+    for(let i = 0; i < photos.length; i++) {
+      const photo = photos[i]
+      const photoCardDiv = document.createElement('div')
+      const imageElement = document.createElement('img')
+      const h5Element = document.createElement('h5')
+
+      photoCardDiv.className = 'photo-card'
+      photoCardDiv.dataset['id'] = photo.id
+      photoCardDiv.id = photo.id
+      photoCardDiv.style.border = '1px solid #ececec'
+      photoCardDiv.style.padding = '20px'
+      photoCardDiv.style.flexBasis = 'min-content'
+
+      imageElement.className = 'photo-image'
+      imageElement.src = photo.url
+      imageElement.alt = `photo-image-${photo.id}`
+
+      imageElement.style.maxWidth = '300px'
+      imageElement.style.maxHeight = '200px'
+      imageElement.style.objectFit = 'cover'
+
+      h5Element.className = 'title'
+      h5Element.textContent = photo.title
+
+      photoCardDiv.appendChild(imageElement)
+      photoCardDiv.appendChild(h5Element)
+
+      galleryDiv.appendChild(photoCardDiv)
+    }
+    return galleryDiv
+  }
+
+  const photosGalleryElement = createPhotosGallery()
+  const photosGalleryWrapper = document.getElementById('photos-gallery-wrapper')
+
+  photosGalleryWrapper.appendChild(photosGalleryElement)
+</script>

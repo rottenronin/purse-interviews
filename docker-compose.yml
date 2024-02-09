@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: test_db
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_user_password
+  app:
+    build:
+      context: ./back-end
+      dockerfile: ./Dockerfile
+    command: npm start
+    volumes:
+      - ./back-end:/app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+  vueapp:
+    build:
+      context: ./front-ends/vuejs
+      dockerfile: ./Dockerfile
+    container_name: vueapp
+    volumes:
+      - ./front-ends/vuejs:/front-ends/vuejs
+      - "/front-ends/vuejs/node_modules"
+    ports:
+      - '8080:8080'

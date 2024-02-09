@@ -1,0 +1,48 @@
+<div class="home-content">
+  <h3>This is a tech interview for front-end developer post</h3>
+
+  <h4># with docker-compose</h4>
+  <pre>
+    <code class="xml">
+      docker-compose up
+    </code>
+  </pre>
+
+  <h4># without docker</h4>
+  <pre>
+    <code class="xml">
+      cd ./back-end
+      npm run start
+      // node server available at localhost:3000
+
+      cd ./front-ends/vuejs
+      npm run dev
+      // vuejs available at localhost:8080
+    </code>
+  </pre>
+
+  <h4># unit tests</h4>
+  <pre>
+    <code class="xml">
+      cd ./back-end
+      npm run test:lint
+    </code>
+  </pre>
+
+  <h4># improvements</h4>
+  <pre>
+    <code class="xml">
+      - multi languages supports
+      - better ui
+      - e2e testings
+      - persistent db using postgresql (instead of localindexeddb)
+      - other front-ends projects (react, selvet ...)
+    </code>
+  </pre>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(){
+    hljs.highlightAll()
+  })
+</script>

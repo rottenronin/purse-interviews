@@ -1,0 +1,58 @@
+<pre class="question-statement">
+  <div class="question">
+    Pun intended. Develop a simple Leave Management System for managers and employees.
+
+    ### A Page for Managers:
+
+    -   **Functionality:**
+        -   Display a list of leave requests with details: employee name, validation status (pending, approved, rejected), and period.
+        -   Include functionality to view detailed information on a request, including comments and buttons to approve or reject the request.
+
+    ### A Form For Employees:
+
+    -   **Functionality:**
+        -   Provide a form for employees to submit leave requests. The form should include fields for the employee name, period of leave, and a comment section.
+
+    ### Technical Requirements:
+
+    -   You may use a UI framework of your choice (preferably React or Svelte).
+    -   You may use a UI Kit.
+    -   The choice of data source and state management is up to you.
+    -   The interface should be simple, yet well-crafted.
+
+  </div>
+</pre>
+
+<div class="realizations">
+  <div
+    class="realization"
+    id="realization-vue"
+  >
+    <img
+      width="100"
+      alt="Vue.js Logo 2"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/512px-Vue.js_Logo_2.svg.png"
+    >
+    
+    <h5>Realization with Vuejs</h5>
+  </div>
+</div>
+
+<script>
+  function redirectToVueProject() {
+    window.open('http://localhost:8080', '_blank')
+  }
+  document.addEventListener("DOMContentLoaded", function(){
+    document.getElementById('realization-vue').addEventListener(
+      'click',
+      redirectToVueProject,
+    )
+  })
+
+  window.onbeforeunload = function () {
+    document.getElementById('realization-vue').removeEventListener(
+      'click',
+      redirectToVueProject,
+    )
+  }
+</script>
