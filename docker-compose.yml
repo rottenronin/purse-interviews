@@ -13,6 +13,7 @@ services:
     command: npm start
     volumes:
       - ./back-end:/app
+      - /app/node_modules
     ports:
       - '3000:3000'
     # depends_on:
@@ -24,6 +25,6 @@ services:
     container_name: vueapp
     volumes:
       - ./front-ends/vuejs:/front-ends/vuejs
-      - "/front-ends/vuejs/node_modules"
+      - /front-ends/vuejs/node_modules
     ports:
       - '8080:8080'
