@@ -28,3 +28,14 @@ services:
       - /front-ends/vuejs/node_modules
     ports:
       - '8080:8080'
+
+  reactapp:
+    build:
+      context: ./front-ends/reactjs
+      dockerfile: ./Dockerfile
+    container_name: reactapp
+    volumes:
+      - ./front-ends/reactjs:/front-ends/reactjs
+      - /front-ends/reactjs/node_modules
+    ports:
+      - '8081:8081'
