@@ -48,6 +48,12 @@ pre .question {
     
 }
 
+.realizations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .realizations .realization {
   cursor: pointer;
   border: 1px solid #ececec;

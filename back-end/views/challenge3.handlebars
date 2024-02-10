@@ -23,36 +23,68 @@
   </div>
 </pre>
 
-<div class="realizations">
+<div
+  class="realizations"
+  id="realizations"
+>
   <div
     class="realization"
     id="realization-vue"
+    data-port="8080"
   >
     <img
       width="100"
-      alt="Vue.js Logo 2"
+      alt="Vue.js Logo"
       src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/512px-Vue.js_Logo_2.svg.png"
     >
     
     <h5>Realization with Vuejs</h5>
   </div>
+
+  <div
+    class="realization"
+    id="realization-reactjs"
+    data-port="8081"
+  >
+    <img
+      width="100"
+      alt="React.js logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/270px-React-icon.svg.png"
+    >
+    
+    <h5>Realization with Reactjs (in progress)</h5>
+  </div>
 </div>
 
 <script>
-  function redirectToVueProject() {
-    window.open('http://localhost:8080', '_blank')
+  // traverse up to first child of [root] 
+  function findFirst(root, el){
+    while(true){
+    el = el.parentNode;
+    if (el && el.parentNode === root){
+      return el;
+    }
+    }
+    return null;  
+  }
+  function redirectToProject(event, parentElem) {
+    let from = event.target || event.srcElement
+
+    from = from.parentNode === parentElem ? from : findFirst(parentElem, from)
+    window.open(`http://localhost:${from.dataset.port}`, '_blank')
   }
   document.addEventListener("DOMContentLoaded", function(){
-    document.getElementById('realization-vue').addEventListener(
+    const parentElem = document.getElementById('realizations')
+    parentElem.addEventListener(
       'click',
-      redirectToVueProject,
+      (event) => redirectToProject(event, parentElem),
     )
   })
 
   window.onbeforeunload = function () {
     document.getElementById('realization-vue').removeEventListener(
       'click',
-      redirectToVueProject,
+      redirectToProject,
     )
   }
 </script>
