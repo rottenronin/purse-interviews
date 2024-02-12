@@ -14,8 +14,12 @@ npm run start
 // node server available at localhost:3000
 
 cd ./front-ends/vuejs
-npm run dev
+npm install && npm run dev
 // vuejs available at localhost:8080
+
+cd ./front-ends/reactjs
+npm install && npm run dev
+// reactjs available at localhost:8080
 ```
 
 #### unit tests
