@@ -8,6 +8,8 @@ const port = 3000;
 
 app.use(express.static('public'))
 
+app.use('/favicon.ico', express.static('public/favicon.ico'))
+
 app.engine('handlebars', engine({
   layoutsDir: __dirname + '/views/layouts',
   partialsDir: __dirname + '/views/partials'
