@@ -9,7 +9,7 @@ import {
 import './index.css'
 import ErrorPage from './Error.tsx'
 import LeaveRequestForm from './pages/LeaveRequestForm.tsx'
-import LeaveRequesList from './pages/LeaveRequestList.tsx'
+import LeaveRequestList from './pages/LeaveRequestList.tsx'
 
 const router = createBrowserRouter([
   {
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <LeaveRequesList />
+        element: <LeaveRequestList />
       },
       {
         path: '/leave-request-form',

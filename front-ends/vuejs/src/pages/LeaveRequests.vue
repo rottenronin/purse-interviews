@@ -99,7 +99,6 @@ onBeforeMount(async () => {
 function onRowClick(item: LeaveRequest) {
   state.selectedItem = item
   state.showDetails = true
-  console.log('00 on row clicked', item)
 }
 
 function onCloseModal() {

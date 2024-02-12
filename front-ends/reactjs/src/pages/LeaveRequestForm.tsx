@@ -1,30 +1,62 @@
-import React from 'react'
 import {
   Button,
-  Checkbox,
   DatePicker,
   Form,
   Input,
+  notification,
 } from 'antd'
 
-export default function LeaveRequesForm() {
-  function onFinish() {
+import './leave-request-form.css'
+import localforageService from '../services/localforage.service'
+import { uniqueKey } from '../services/helper.service'
 
+export default function LeaveRequesForm() {
+  const [api, contextHolder] = notification.useNotification()
+
+  function onFinish(values: FormFields) {
+    const key = uniqueKey()
+    const dateFrom = values.dates?.[0].$d.toISOString()
+    const dateTo = values.dates?.[1].$d.toISOString()
+    
+    localforageService.setItem(key, JSON.stringify({
+      ...values,
+      key,
+      dates: [
+        dateFrom,
+        dateTo,
+      ],
+      status: 'pending'
+    }))
+    api.success({
+      message: 'You added a new request'
+    })
+    form.resetFields()
   }
 
   function onFinishFailed() {
-
+    api.error({
+      message: 'Errors occured',
+      description: 'Please fix errors before continuing'
+    })
   }
 
-  type FormField = {
+  type FormFields = {
     name?: string
-    dates?: string[]
+    dates?: [{
+      $d: Date
+    }, {
+      $d: Date
+    }]
     comment?: string
   }
 
+  const [form] = Form.useForm()
+
   return(
     <>
+      {contextHolder}
       <Form
+        form={form}
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
@@ -34,8 +66,9 @@ export default function LeaveRequesForm() {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
         layout='vertical'
+        className="leave-request-form"
         >
-          <Form.Item<FormField>
+          <Form.Item<FormFields>
             label="Full name"
             name="name"
             rules={[{
@@ -45,7 +78,7 @@ export default function LeaveRequesForm() {
           >
             <Input />
         </Form.Item>
-        <Form.Item
+        <Form.Item<FormFields>
           label="Dates"
           name="dates"
           rules={[{
@@ -53,9 +86,9 @@ export default function LeaveRequesForm() {
             message: 'Please select your leave dates!',
           }]}
         >
-          <DatePicker.RangePicker  />
+          <DatePicker.RangePicker showTime={true} />
         </Form.Item>
-        <Form.Item
+        <Form.Item<FormFields>
           label="Comment"
           name="comment"
           rules={[{
@@ -66,11 +99,9 @@ export default function LeaveRequesForm() {
           <Input.TextArea />
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
-        </Form.Item>
       </Form>
     </>
   )
